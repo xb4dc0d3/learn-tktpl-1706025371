@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Hello World</string>
+    <string name="change_ncolor">Change\nText</string>
+    <string name="ship_wheel">ship_wheel</string>
+    <string name="send_a_message">Send a Message</string>
+    <string name="send_message_header">Send Message</string>
+    <string name="send_message_text_bar" />
+    <string name="send_button">Send </string>
+    <string name="button_launch_send_message_activity">Send</string>
+    <string name="send_message_hint">Send a message…</string>
 </resources>
