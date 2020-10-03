@@ -22,12 +22,12 @@
         app:layout_constraintVertical_bias="0.13" />
 
     <EditText
-        android:id="@+id/text_bar_username"
+        android:id="@+id/text_bar_bookname"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="@string/hint_enter_username"
+        android:hint="@string/hint_enter_book_name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -35,26 +35,26 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button_search_username"
+        android:id="@+id/button_search_bookname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:onClick="searchUsername"
+        android:onClick="searchBookName"
         android:text="@string/button_search_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_bar_username" />
+        app:layout_constraintTop_toBottomOf="@+id/text_bar_bookname" />
 
     <TextView
-        android:id="@+id/username_result"
+        android:id="@+id/book_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_search_username"
+        app:layout_constraintTop_toBottomOf="@+id/button_search_bookname"
         app:layout_constraintVertical_bias="0.245" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

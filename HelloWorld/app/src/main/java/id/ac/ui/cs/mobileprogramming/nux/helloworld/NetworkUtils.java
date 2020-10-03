@@ -1,39 +1,67 @@
 package id.ac.ui.cs.mobileprogramming.nux.helloworld;
-
-import android.util.Log;
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class NetworkUtils {
 
-    private static final String TWITTER_URL = "https://www.instagram.com/";
-    private static final String FACEBOOK_URL = "https://www.facebook.com/";
-    private static final String INSTAGRAM_URL = "https://www.twitter.com/";
+    private static final String BOOK_URL =
+            "https://raw.githubusercontent.com/benoitvallon/100-best-books/master/books.json";
 
-    private String getTwitterUsername(String username) {
-        HttpURLConnection urlConnection = null;
+    public static String getBookName(String bookName) {
+
+        URL url = null;
         BufferedReader reader = null;
+        HttpURLConnection httpURLConnection = null;
         String result = null;
-        return "Not Implemented Twitter\n";
-    }
 
-    private String getFacebookUsername(String username) {
+        try {
+            url = new URL(BOOK_URL);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.connect();
 
-        return "Not Implemented Facebook\n";
-    }
+            // Get the InputStream.
+            InputStream inputStream = httpURLConnection.getInputStream();
 
-    private String getInstagramUsername(String username) {
+            // Create a buffered reader from that input stream.
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            result = reader.toString();
 
-        return "Not implement instagram\n";
-    }
+            // String Builder reserve result
+            StringBuilder builder = new StringBuilder();
 
-    public static String getUsername(String queryUsername) {
-        NetworkUtils net = new NetworkUtils();
-        String resultFacebook = net.getFacebookUsername(queryUsername);
-        String resultInstagram = net.getInstagramUsername(queryUsername);
-        String resultTwitter = net.getTwitterUsername(queryUsername);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.toLowerCase();
+                builder.append(line);
+                builder.append("\n");
 
-        Log.d("Result Twitter", resultTwitter);
-        return resultFacebook + " " + resultInstagram +" "+resultTwitter;
+                // if book contains the title found
+                if (line.contains("title") && line.contains(bookName)) {
+                    result = line.toLowerCase().replace(",","");
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (httpURLConnection != null) {
+                httpURLConnection.disconnect();
+            }
+
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 }

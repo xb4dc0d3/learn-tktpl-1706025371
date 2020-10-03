@@ -18,8 +18,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /***
  * @Deprecated
@@ -29,15 +30,15 @@ import java.util.concurrent.ExecutionException;
  */
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 
-    private EditText mUsername;
-    private TextView mShowUsername;
+    private EditText mBookName;
+    private TextView mBookResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mUsername = findViewById(R.id.text_bar_username);
-        mShowUsername = (TextView) findViewById(R.id.username_result);
+        mBookName = findViewById(R.id.text_bar_bookname);
+        mBookResult = (TextView) findViewById(R.id.book_result);
 
         //If the loader exists, initialize it.
         // You only want to reassociate the loader to the activity if a query has already been executed.
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
-    public void searchUsername(View view) {
-        String queryUsername = mUsername.getText().toString();
+    public void searchBookName(View view) {
+        String queryBookName = mBookName.getText().toString();
 
         // Hide keyboard after entering the text
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -62,61 +63,54 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             networkInfo = connMgr.getActiveNetworkInfo();
         }
 
-        if (networkInfo != null && networkInfo.isConnected() && queryUsername.length() != 0) {
+        if (networkInfo != null && networkInfo.isConnected() && queryBookName.length() != 0) {
 
             // If the network is connected start a FetchUsername AsyncTask.
             Bundle queryBundle = new Bundle();
-            queryBundle.putString("queryUsername", queryUsername);
+            queryBundle.putString("queryBookName", queryBookName);
             getSupportLoaderManager().restartLoader(0, queryBundle, this);
 
-            mShowUsername.setText("");
-            mShowUsername.setText(R.string.loading);
+            mBookResult.setText("");
+            mBookResult.setText(R.string.loading);
 
         } else {
-            if (queryUsername.length() == 0) {
+            if (queryBookName.length() == 0) {
 
-                // if input empty
-                mShowUsername.setText("");
-                mShowUsername.setText(R.string.no_search_term);
+                // if input empty show no search
+                mBookResult.setText("");
+                mBookResult.setText(R.string.no_search_term);
             } else {
                 // if not network connection show the text
-                mShowUsername.setText("");
-                mShowUsername.setText(R.string.no_network);
+                mBookResult.setText("");
+                mBookResult.setText(R.string.no_network);
             }
         }
-
-        Log.d("Test Debug", "searchUsername permission done");
-        Log.d("Test Username", queryUsername);
     }
 
     @NonNull
     @Override
     public Loader<String> onCreateLoader(int id, @Nullable Bundle args) {
-        String queryUsername= "";
+        String queryBookname = "";
 
         if (args != null) {
-            queryUsername = args.getString("queryUsername");
+            queryBookname = args.getString("queryBookName");
         }
-        return new FetchUsername(this, queryUsername);
+        return new FetchBook(this, queryBookname);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<String> loader, String data) {
-
         try {
-            Thread.sleep(2000);
-            Log.d("TestOnLoadFinished", data);
-
-            String[] data_splitted = data.split("\n");
-
-            if (!data.equals("")){
-                for(int i=0 ; i< data_splitted.length; i++){
-                    mShowUsername.setText(data);
-                }
+            Thread.sleep(3000);
+            // If both are found, display the result.
+            if (data != null && !data.contains("java.io.Buffered")) {
+                mBookResult.setText(data);
             }
-        }
-
-        catch (Exception e) {
+            else {
+                mBookResult.setText(R.string.not_found);
+            }
+        } catch (Exception e) {
+            mBookResult.setText(R.string.not_found);
             e.printStackTrace();
         }
 
