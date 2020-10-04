@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (networkInfo != null && networkInfo.isConnected() && queryBookName.length() != 0) {
 
-            // If the network is connected start a FetchUsername AsyncTask.
+            // If the network is connected start a FetchBook AsyncTask.
             Bundle queryBundle = new Bundle();
             queryBundle.putString("queryBookName", queryBookName);
             getSupportLoaderManager().restartLoader(0, queryBundle, this);
