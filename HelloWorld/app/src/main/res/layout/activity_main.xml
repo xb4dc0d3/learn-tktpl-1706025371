@@ -6,18 +6,24 @@
     android:layout_margin = "16dp"
     android:orientation = "vertical"
     tools:context = ".MainActivity">
+
     <ListView
-        android:id = "@+id/wifiList"
-        android:layout_width = "match_parent"
-        android:layout_height = "match_parent"
-        android:layout_above = "@+id/scanBtn" />
+        android:id="@+id/wifiList"
+        android:layout_width="match_parent"
+        android:layout_height="538dp"
+        android:layout_above="@+id/scanBtn"
+        android:layout_marginBottom="97dp" />
+
     <Button
-        android:id = "@+id/scanBtn"
-        android:layout_width = "match_parent"
-        android:layout_height = "50dp"
-        android:layout_alignParentBottom = "true"
-        android:layout_gravity = "bottom"
-        android:layout_margin = "15dp"
-        android:text = "@string/scan_wifi"
-        android:background="@color/colorAccent"/>
+        android:id="@+id/scanBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:layout_margin="15dp"
+        android:background="@color/colorAccent"
+        android:text="@string/scan_wifi"
+        />
+
 </RelativeLayout>
