@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.nux.helloworld;
+package id.ac.ui.cs.mobileprogramming.nux.helloworld.activity;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import id.ac.ui.cs.mobileprogramming.nux.helloworld.R;
+import id.ac.ui.cs.mobileprogramming.nux.helloworld.WifiReceiver;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        String username = getIntent().getExtras().getString("username");
+        Toast.makeText(MainActivity.this, "Welcome " + username, Toast.LENGTH_SHORT).show();
     }
     @Override
     protected void onPostResume() {
@@ -86,10 +92,5 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Enable the permission first!", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    
-    public void sendAllWifiList(View view) {
-
     }
 }
