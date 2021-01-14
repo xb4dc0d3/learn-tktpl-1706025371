@@ -1,3 +1,7 @@
+# Dot Path
+*.txt
+*.jks
+
 # Built application files
 */*.apk
 */*.aar
