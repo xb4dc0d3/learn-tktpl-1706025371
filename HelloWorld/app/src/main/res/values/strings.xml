@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Hello World</string>
+    <string name="app_name">Find Your Book!</string>
+    <string name="social_media_search">Book Finder</string>
+    <string name="hint_enter_book_name">Enter the book name…</string>
+    <string name="button_search_text">Search</string>
+    <string name="no_network">Please check your connection and try again…</string>
+    <string name="no_search_term">Please check your input…</string>
+    <string name="not_found">Book not found</string>
+    <string name="loading">Loading…</string>
 </resources>
